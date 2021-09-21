@@ -3,3 +3,16 @@
 //
 
 #include "List.h"
+
+void List::addEvent(Event e) {
+    eventList.push_back(e);
+}
+
+void List::deleteEvent(Event e) {
+    eventList.remove(e);
+}
+
+void List::displayEvents() {
+    for(auto i : eventList)
+        i.display();
+}

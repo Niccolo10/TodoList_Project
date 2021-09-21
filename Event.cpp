@@ -36,6 +36,6 @@ void Event::setEventDate(const Date &eventDate) {
 
 void Event::display() const {
     std::cout<<"Title:        " << eventTitle << std::endl;
-    std::cout<<"Description:  " << eventDescription << std::endl;
+    std::cout<<"Description:  '" << eventDescription << " '" <<std::endl;
     std::cout<<"Date:         " << eventDate.getDay() << "/" << eventDate.getMonth() << "/" << eventDate.getYear() << std::endl;
 }

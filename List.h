@@ -6,23 +6,22 @@
 #define TODOLIST_PROJECT_LIST_H
 
 
-#include <fstream>
-#include <iostream>
+#include <list>
+#include "Event.h"
 
 using namespace std;
 
 class List{
 public:
-    List (string n): name (n){
-        ofstream File;
-        File.open ("File" +n+".txt");
-        File << "Write in the file";
-        File.close();
 
-    }
+    void addEvent(Event e);
+    void deleteEvent(Event e);
+    void displayEvents();
+
 
 private:
-    string name;
+
+    std::list<Event> eventList;
 
 };
 
