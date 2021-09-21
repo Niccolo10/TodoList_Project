@@ -2,7 +2,7 @@
 // Created by nicco on 20/09/2021.
 //
 
-#include "List.h"
+#include "List.h" //Cambiamento nel commit precedente
 
 void List::addEvent(Event e) {
     eventList.push_back(e);
