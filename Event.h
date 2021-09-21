@@ -13,6 +13,8 @@ class Event {
 public:
     Event (std::string description, std::string title, Date date);
 
+    bool operator==(Event e) const ;
+
     const std::string &getEventDescription() const;
 
     void setEventDescription(const std::string &eventDescription);

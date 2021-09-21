@@ -10,6 +10,10 @@ Event::Event(std::string description, std::string title, Date date) : eventDate(
     this->eventTitle = title;
 }
 
+bool Event::operator==(Event e) const {
+    return eventTitle == e.eventTitle && eventDescription == e.eventDescription ;
+}
+
 const std::string &Event::getEventDescription() const {
     return eventDescription;
 }
