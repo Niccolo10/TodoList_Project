@@ -43,3 +43,4 @@ void Event::display() const {
     std::cout<<"Description:  '" << eventDescription << " '" <<std::endl;
     std::cout<<"Date:         " << eventDate.getDay() << "/" << eventDate.getMonth() << "/" << eventDate.getYear() << std::endl;
 }
+

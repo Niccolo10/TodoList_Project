@@ -22,6 +22,10 @@ public:
     int getMaxDays (int year, int month);
     int getSize();
 
+    void setTitle(int pos, std::string newTitle);
+    void setDescription(int pos, std::string newDescription);
+    void setDate(int pos);
+
 private:
 
     std::list<Event> eventList;

@@ -67,9 +67,70 @@ int List::getSize() {
 void List::writeEvents(std::string listName) {
     ofstream File;
     File.open("File_"+listName+".txt");
+    int day,month,year;
     for(auto it : eventList){
+        day = it.getEventDate().getDay();
+        month=it.getEventDate().getMonth();
+        year=it.getEventDate().getYear();
         File << "Title:        "+ it.getEventTitle()+"\n";
         File << "Description:  "+it.getEventDescription()+"\n";
+        File << "Data:         "+std::to_string(day)+"/"+std::to_string(month)+"/"+std::to_string(year)+"\n\n";
     }
     File.close();
+}
+
+void List::setTitle(int pos, std::string newTitle) {
+    auto i = eventList.begin();
+    std::advance(i,pos-1);
+    i->setEventTitle(newTitle);
+    std::cout << "Title changed \n";
+}
+
+void List::setDescription(int pos, std::string newDescription) {
+    auto i = eventList.begin();
+    std::advance(i,pos-1);
+    i->setEventDescription(newDescription);
+    std::cout << "Description changed \n";
+}
+
+void List::setDate(int pos) {
+
+    int day;
+    int month;
+    int year;
+
+    std::cout << "Enter the new year, month and day in numbers\n";
+    year_selection:
+    std::cout << "Year->";
+    std::cin >> year;
+    if (year < 0) {
+        std::cout << "impossible year";
+        goto year_selection;
+    }
+
+    month_selection:
+    std::cout << "Month->";
+    std::cin >> month;
+    if (month < 0 || month > 12) {
+        std::cout << "impossible month";
+        goto month_selection;
+    }
+
+    int maxDays = getMaxDays(year, month);
+
+    day_selection:
+    std::cout << "Day ->";
+    std::cin >> day;
+    if (day < 0 || day > maxDays) {
+        std::cout << "impossible day";
+        goto day_selection;
+    }
+
+    Date newDate(day, month, year);
+    auto i = eventList.begin();
+    std::advance(i,pos-1);
+    i->setEventDate(newDate);
+    std::cout << "Data changed \n";
+
+
 }
