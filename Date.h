@@ -20,7 +20,6 @@ public:
 private:
     int day,month,year;
 
-    int getMaxDays (int year);
 
 };
 

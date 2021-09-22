@@ -7,7 +7,7 @@
 
 
 #include <list>
-#include "Event.h" //Cambiamento nel commit precedente
+#include "Event.h"
 
 using namespace std;
 
@@ -16,8 +16,11 @@ public:
 
     void addEvent(Event e);
     void deleteEvent(Event e);
+    void deleteEvent(int pos);
     void displayEvents();
-
+    void writeEvents(std::string listName);
+    int getMaxDays (int year, int month);
+    int getSize();
 
 private:
 
