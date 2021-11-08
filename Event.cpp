@@ -5,9 +5,10 @@
 #include "Event.h"
 #include <iostream>
 
-Event::Event(std::string description, std::string title, Date date) : eventDate(date) {
-    this->eventDescription = description;
-    this->eventTitle = title;
+Event::Event(const std::string &d,const std::string &t, const Date &dat, bool done) : eventDate(dat) {
+    this->eventDescription = d;
+    this->eventTitle = t;
+    this->done = done;
 }
 
 bool Event::operator==(Event e) const {
@@ -38,6 +39,13 @@ void Event::setEventDate(const Date &eventDate) {
     Event::eventDate = eventDate;
 }
 
+bool Event::isDone() const {
+    return done;
+}
+
+void Event::setDone(bool done) {
+    Event::done = done;
+}
 void Event::display() const {
     std::cout<<"Title:        " << eventTitle << std::endl;
     std::cout<<"Description:  '" << eventDescription << " '" <<std::endl;

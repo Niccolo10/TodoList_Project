@@ -11,7 +11,7 @@
 
 class Event {
 public:
-    Event (std::string description, std::string title, Date date);
+    Event (const std::string &d, const std::string &t, const Date &dat , bool done );
 
     bool operator==(Event e) const ;
 
@@ -29,10 +29,15 @@ public:
 
     void display()const;
 
+    bool isDone() const;
+
+    void setDone(bool done);
+
 private:
     std::string eventDescription;
     std::string eventTitle;
     Date eventDate;
+    bool done;
 
 };
 

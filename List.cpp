@@ -6,11 +6,15 @@
 #include <fstream>
 #include "List.h"
 
-void List::addEvent(Event e) {
+List::List(const std::string &n) {
+    this->listName = n;
+}
+
+void List::addEvent(const Event &e) {
     eventList.push_back(e);
 }
 
-void List::deleteEvent(Event e) {
+void List::deleteEvent(const Event &e) {
     eventList.remove(e);
 }
 
@@ -21,52 +25,73 @@ void List::deleteEvent(int pos) {
     eventList.remove(*i);
 }
 
-void List::displayEvents() {
-
-    int eventNumber = 1;
-    for(auto i : eventList){
-        std::cout << eventNumber++ << ")\n";
-        i.display();
-        std::cout << "\n";
+void List::setEventDone(const Event &e){
+    for (auto it : eventList){
+        if (it==e)
+            it.setDone(true);
     }
 }
 
-int List::getMaxDays(int year, int month) {
-    short unsigned int maxDay = 31;
-    switch (month) {
-        case 4: //April
-        case 6: //June
-        case 8: //September
-        case 11: //November
-            maxDay = 30;
-            break;
-        case 2: {
+void List::setEventDone(int pos){
+    auto it=eventList.begin();
+    for (int i=1;i<pos;i++)
+        it++;
+    (*it).setDone(true);
+}
 
-            if (year % 4 == 0) {
-                if (year % 100 == 0) {
-                    if (year % 400 == 0) {
-                        maxDay = 29;
-                    } else {
-                        maxDay = 28;
-                    }
-                } else {
-                    maxDay = 29;
-                }
-            } else {
-                maxDay = 28;
-            }
+
+const void List::displayEvents() const {
+
+    int eventNumber = 1;
+    if (eventList.size()) {
+        for (auto it : eventList) {
+            std::cout << eventNumber++ << ")";
+            if (it.isDone())
+                std::cout << "DONE";
+            std::cout << "\n";
+            it.display();
+            std::cout << "\n";
         }
     }
-    return maxDay;
+    else {
+        std::cout<<"List is empty"<<std::endl;
+    }
+}
+
+void List::displayEvent_notDone() const {
+    for (auto it : eventList){
+        if (!it.isDone()) {
+            it.display();
+            std::cout<<std::endl;
+        }
+    }
+}
+
+void List::displayEvent_Done() const {
+    for (auto it : eventList) {
+        if (it.isDone())
+            it.display();
+    }
 }
 
 int List::getSize() {
     return eventList.size();
 }
 
-void List::writeEvents(std::string listName) {
-    ofstream File;
-    File.open("File_"+listName+".txt");
+Event List::getEvent(int position) const {
+    auto it=eventList.begin();
+    for (int i=1;i<position;i++)
+        it++;
+    return *it;
+}
+
+const std::string &List::getName() const {
+    return listName;
+}
+
+
+void List::writeEvents(std::string listName, std::ofstream& File) {
+
     int day,month,year;
     for(auto it : eventList){
         day = it.getEventDate().getDay();
@@ -75,8 +100,9 @@ void List::writeEvents(std::string listName) {
         File << "Title:        "+ it.getEventTitle()+"\n";
         File << "Description:  "+it.getEventDescription()+"\n";
         File << "Data:         "+std::to_string(day)+"/"+std::to_string(month)+"/"+std::to_string(year)+"\n\n";
+        if (it.isDone())
+            File << " -- DONE -- \n\n";
     }
-    File.close();
 }
 
 void List::setTitle(int pos, std::string newTitle) {
@@ -94,15 +120,14 @@ void List::setDescription(int pos, std::string newDescription) {
 }
 
 void List::setDate(int pos) {
-
     int day;
     int month;
     int year;
 
     std::cout << "Enter the new year, month and day in numbers\n";
-    year_selection:
     std::cout << "Year->";
     std::cin >> year;
+    year_selection:
     if (year < 0) {
         std::cout << "impossible year";
         goto year_selection;
@@ -116,12 +141,10 @@ void List::setDate(int pos) {
         goto month_selection;
     }
 
-    int maxDays = getMaxDays(year, month);
-
     day_selection:
     std::cout << "Day ->";
     std::cin >> day;
-    if (day < 0 || day > maxDays) {
+    if (day < 0 || day > 31) {
         std::cout << "impossible day";
         goto day_selection;
     }
@@ -131,6 +154,5 @@ void List::setDate(int pos) {
     std::advance(i,pos-1);
     i->setEventDate(newDate);
     std::cout << "Data changed \n";
-
 
 }

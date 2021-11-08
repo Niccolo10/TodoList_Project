@@ -14,13 +14,21 @@ using namespace std;
 class List{
 public:
 
-    void addEvent(Event e);
-    void deleteEvent(Event e);
+    explicit List(const std::string &n);
+
+    void addEvent(const Event &e);
+    void deleteEvent(const Event &e);
     void deleteEvent(int pos);
-    void displayEvents();
-    void writeEvents(std::string listName);
-    int getMaxDays (int year, int month);
+    void setEventDone(const Event &e);
+    void setEventDone(int position);
+    const void displayEvents() const ;
+    void displayEvent_notDone() const ;
+    void displayEvent_Done() const ;
     int getSize();
+    Event getEvent(int position) const ;
+    const std::string &getName() const;
+
+    void writeEvents(std::string listName, std::ofstream& File);
 
     void setTitle(int pos, std::string newTitle);
     void setDescription(int pos, std::string newDescription);
@@ -29,6 +37,7 @@ public:
 private:
 
     std::list<Event> eventList;
+    std::string listName;
 
 };
 

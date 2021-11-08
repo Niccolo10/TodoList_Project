@@ -8,7 +8,7 @@
 
 class Date {
 public:
-    explicit Date(int day,int month, int year);
+    explicit Date(int day, int month, int year);
 
     int getDay() const;
 
@@ -18,7 +18,9 @@ public:
 
 
 private:
+
     int day,month,year;
+    int getMaxDays (int year, int month) const ;
 
 
 };
