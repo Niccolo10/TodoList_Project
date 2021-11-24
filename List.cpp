@@ -59,6 +59,8 @@ const void List::displayEvents() const {
 }
 
 void List::displayEvent_notDone() const {
+    int num = numberEventNotDone();
+    std::cout << "Number of event not Done: " << num << std::endl ;
     for (auto it : eventList){
         if (!it.isDone()) {
             it.display();
@@ -68,10 +70,30 @@ void List::displayEvent_notDone() const {
 }
 
 void List::displayEvent_Done() const {
+    int num = numberEventDone();
+    std::cout << "Number of event Done: " << num << std::endl ;
     for (auto it : eventList) {
         if (it.isDone())
             it.display();
     }
+}
+
+int List::numberEventDone() const {
+    int count = 0;
+    for(auto it: eventList){
+        if (it.isDone())
+            count++;
+    }
+    return count;
+}
+
+int List::numberEventNotDone() const {
+    int count = 0;
+    for(auto it: eventList){
+        if (!it.isDone())
+            count++;
+    }
+    return count;
 }
 
 int List::getSize() {

@@ -189,12 +189,10 @@ int main() {
                                     LoL.printLists();
                                     cin.clear();
                                     getline(cin,move);
-                                    if (LoL.findList(move)){
-                                        Event e = LoL.getList(listselected).getEvent(mod);
-                                        LoL.moveList (listselected,move,e);
-                                    }
-                                    else
-                                        cout<< "The input is not a list"<< endl;
+                                    if(LoL.findList(move)) {
+                                        LoL.moveList(listselected, move, mod);
+                                    } else
+                                        std::cout << "Invalid list" << std::endl;
                                     break;
                                     }
                             }

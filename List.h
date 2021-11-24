@@ -24,6 +24,8 @@ public:
     const void displayEvents() const ;
     void displayEvent_notDone() const ;
     void displayEvent_Done() const ;
+    int numberEventDone() const ;
+    int numberEventNotDone() const ;
     int getSize();
     Event getEvent(int position) const ;
     const std::string &getName() const;

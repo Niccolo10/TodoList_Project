@@ -29,7 +29,10 @@ TEST_F(Tester, test) {
     LoL.addEventToList("lista 2", event2);
     LoL.addEventToList("lista 3", event3);
     EXPECT_EQ(LoL.getSize(), 3);
-    LoL.moveList("lista 2", "lista 3", event2);
+    EXPECT_EQ(LoL.findList("lista 2"), true);
+    LoL.moveList("lista 2", "lista 3", 1);
+    EXPECT_THROW(LoL.moveList("Lista 1", "Lista 5", 0), std::runtime_error);
+    EXPECT_THROW(LoL.getList("lista 5"), std::runtime_error);
     EXPECT_EQ(LoL.getSize(), 3);
     EXPECT_EQ(LoL.getList("lista 3").getSize(), 2);
     EXPECT_EQ(LoL.getList("lista 2").getSize(), 0);

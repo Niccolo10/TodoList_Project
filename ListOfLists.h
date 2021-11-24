@@ -18,7 +18,7 @@ public:
     void setEventTitle(const std::string &name, std::string &newTitle, int pos);
     void setEventDescription(const std::string &name,std::string &newDescription , int pos);
     void setEventDate (const std::string &name, int pos);
-    void moveList (const std::string &source,const std::string &destination, const Event &e );
+    void moveList (const std::string &source,const std::string &destination, int mod );
     void printLists () const;
     List getList (const std::string &n) const;
     int getSize() const;

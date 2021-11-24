@@ -82,9 +82,14 @@ void ListOfLists::setEventDate(const std::string &name, int pos) {
 }
 
 
-void ListOfLists::moveList(const std::string &source, const std::string &destination, const Event &a) {
-    addEventToList(destination, a);
-    removeEventFromList(source, a);
+void ListOfLists::moveList(const std::string &source, const std::string &destination, int mod) {
+    if(findList(destination)) {
+        Event a = getList(source).getEvent(mod);
+        addEventToList(destination, a);
+        removeEventFromList(source, a);
+    }
+    else
+        throw std::runtime_error ("List not valid");
 }
 
 void ListOfLists::printLists() const {
@@ -93,6 +98,7 @@ void ListOfLists::printLists() const {
 }
 
 List ListOfLists::getList(const std::string &n) const {
+
     auto it = lists.begin();
     while (it != lists.end()) {
         if ((*it).getName() == n) {
@@ -100,6 +106,7 @@ List ListOfLists::getList(const std::string &n) const {
         }
         it++;
     }
+    throw std::runtime_error("Invalid List");
 }
 
 int ListOfLists::getSize() const {
