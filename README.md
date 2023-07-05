@@ -18,11 +18,11 @@ To use the TodoApp, follow these steps:
 2. Open the terminal or command prompt and navigate to the directory where you saved the source code.
 3. Compile the source code using the C++ compiler. For example:
 
-    g++ -o todoapp todoapp.cpp List.cpp ListOfLists.cpp
+    g++ -o TodoList_Project TodoList_Project.cpp
    
 4. Run the compiled executable. For example:
 
-   ./todoapp
+   ./TodoList_Project
 
 
 ## Usage
